@@ -150,26 +150,8 @@ class CartService {
   }
 
   showToast(message) {
-    // Create toast if doesn't exist
-    let toast = document.getElementById('cart-toast');
-    if (!toast) {
-      toast = document.createElement('div');
-      toast.id = 'cart-toast';
-      toast.className = 'toast';
-      document.body.appendChild(toast);
-    }
-
-    // Translate common messages
-    const translations = {
-      'Added to cart': 'Ajouté au panier',
-      'Removed from cart': 'Retiré du panier'
-    };
-    toast.textContent = translations[message] || message;
-    toast.classList.add('show');
-
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, 2000);
+    // Notifications disabled
+    return;
   }
 }
 

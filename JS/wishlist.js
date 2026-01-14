@@ -96,20 +96,8 @@ class WishlistService {
   }
 
   showToast(message) {
-    let toast = document.getElementById('wishlist-toast');
-    if (!toast) {
-      toast = document.createElement('div');
-      toast.id = 'wishlist-toast';
-      toast.className = 'toast';
-      document.body.appendChild(toast);
-    }
-
-    toast.textContent = message;
-    toast.classList.add('show');
-
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, 2000);
+    // Notifications disabled
+    return;
   }
 
   async syncWithBackend() {

@@ -239,7 +239,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         allProducts = result.products;
     }
     await initHomepage();
+    
+    // Hide loader after content is loaded
+    hidePageLoader();
 });
+
+// Hide page loader
+function hidePageLoader() {
+    const loader = document.getElementById('pageLoader');
+    if (loader) {
+        loader.classList.add('hidden');
+        // Remove from DOM after animation
+        setTimeout(() => {
+            loader.remove();
+        }, 300);
+    }
+}
 
 // Default promo banners (fallback)
 const defaultPromoBanners = [

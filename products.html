@@ -227,6 +227,106 @@
                 <span>/</span>
                 <span class="current">Boutique</span>
             </div>
+            
+            <!-- Mobile-friendly Search Bar -->
+            <div class="products-search-bar">
+                <div class="search-input-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="productSearchInput" placeholder="Rechercher un produit..." oninput="handleProductSearch(this.value)">
+                    <button class="search-clear-btn" id="searchClearBtn" onclick="clearProductSearch()" style="display:none;">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <style>
+                .products-search-bar {
+                    margin-bottom: 20px;
+                }
+                .search-input-wrapper {
+                    display: flex;
+                    align-items: center;
+                    background: #fff;
+                    border: 2px solid #e2e8f0;
+                    border-radius: 12px;
+                    padding: 0 16px;
+                    transition: all 0.2s ease;
+                    gap: 12px;
+                }
+                .search-input-wrapper:focus-within {
+                    border-color: var(--main_color);
+                    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+                }
+                .search-input-wrapper i.fa-magnifying-glass {
+                    color: #94a3b8;
+                    font-size: 18px;
+                }
+                .search-input-wrapper input {
+                    flex: 1;
+                    border: none;
+                    outline: none;
+                    padding: 14px 0;
+                    font-size: 15px;
+                    background: transparent;
+                    color: #1f2937;
+                }
+                .search-input-wrapper input::placeholder {
+                    color: #94a3b8;
+                }
+                .search-clear-btn {
+                    background: #f1f5f9;
+                    border: none;
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.2s;
+                }
+                .search-clear-btn:hover {
+                    background: #e2e8f0;
+                }
+                .search-clear-btn i {
+                    color: #64748b;
+                    font-size: 12px;
+                }
+                
+                /* Search results count */
+                .search-results-info {
+                    display: none;
+                    align-items: center;
+                    gap: 8px;
+                    padding: 10px 14px;
+                    background: var(--main_color_light);
+                    border-radius: 8px;
+                    margin-top: 12px;
+                    font-size: 14px;
+                    color: var(--main_color);
+                }
+                .search-results-info.active {
+                    display: flex;
+                }
+                .search-results-info i {
+                    color: var(--main_color);
+                }
+                
+                /* Mobile optimizations */
+                @media (max-width: 768px) {
+                    .search-input-wrapper {
+                        padding: 0 14px;
+                        border-radius: 10px;
+                    }
+                    .search-input-wrapper input {
+                        padding: 12px 0;
+                        font-size: 16px; /* Prevents zoom on iOS */
+                    }
+                    .search-input-wrapper i.fa-magnifying-glass {
+                        font-size: 16px;
+                    }
+                }
+            </style>
         </div>
         <div class="container">
             <!-- Sidebar (Hidden on Mobile by CSS usually, ensuring strict grid) -->

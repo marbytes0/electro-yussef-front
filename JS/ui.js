@@ -1,23 +1,9 @@
 // UI Utilities
 const UI = {
-  // Toast notifications
+  // Toast notifications - disabled
   showToast(message, type = 'info') {
-    let container = document.getElementById('toast-container');
-    if (!container) {
-      container = document.createElement('div');
-      container.id = 'toast-container';
-      document.body.appendChild(container);
-    }
-
-    const toast = document.createElement('div');
-    toast.className = `toast toast-${type} show`;
-    toast.textContent = message;
-    container.appendChild(toast);
-
-    setTimeout(() => {
-      toast.classList.remove('show');
-      setTimeout(() => toast.remove(), 300);
-    }, 3000);
+    // Notifications disabled
+    return;
   },
 
   // Loading states

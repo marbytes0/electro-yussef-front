@@ -3,6 +3,8 @@ let currentPage = 1;
 let currentFilters = {};
 let allProducts = [];
 let categories = [];
+let searchQuery = '';
+let searchTimeout = null;
 
 // Toggle mobile filters sidebar
 function toggleMobileFilters() {
@@ -10,6 +12,43 @@ function toggleMobileFilters() {
     if (sidebar) {
         sidebar.classList.toggle('active');
     }
+}
+
+// Handle product search with debounce
+function handleProductSearch(value) {
+    const clearBtn = document.getElementById('searchClearBtn');
+    
+    // Show/hide clear button
+    if (clearBtn) {
+        clearBtn.style.display = value.length > 0 ? 'flex' : 'none';
+    }
+    
+    // Debounce search
+    if (searchTimeout) {
+        clearTimeout(searchTimeout);
+    }
+    
+    searchTimeout = setTimeout(() => {
+        searchQuery = value.trim();
+        loadProducts(1);
+    }, 300);
+}
+
+// Clear product search
+function clearProductSearch() {
+    const input = document.getElementById('productSearchInput');
+    const clearBtn = document.getElementById('searchClearBtn');
+    
+    if (input) {
+        input.value = '';
+        input.focus();
+    }
+    if (clearBtn) {
+        clearBtn.style.display = 'none';
+    }
+    
+    searchQuery = '';
+    loadProducts(1);
 }
 
 async function initProductsPage() {
@@ -66,7 +105,14 @@ async function loadProducts(page = 1) {
     if (result.success) {
         allProducts = result.products;
         renderProducts(result.products);
-        countEl.textContent = `Affichage de ${result.products.length} sur ${result.pagination?.total || result.products.length} produits`;
+        
+        // Update count with search info
+        const totalCount = result.pagination?.total || result.products.length;
+        if (searchQuery) {
+            countEl.innerHTML = `<i class="fa-solid fa-search" style="margin-right:6px;color:var(--main_color);"></i> ${result.products.length} résultat(s) pour "<strong>${searchQuery}</strong>"`;
+        } else {
+            countEl.textContent = `Affichage de ${result.products.length} sur ${totalCount} produits`;
+        }
 
         if (result.pagination) {
             renderPagination(result.pagination);
@@ -85,7 +131,7 @@ function getFilters() {
     const urlParams = new URLSearchParams(window.location.search);
 
     return {
-        query: urlParams.get('q') || '',
+        query: searchQuery || urlParams.get('q') || '',
         category: checkedCategories.length === 1 ? checkedCategories[0] : '',
         minPrice: minPrice || null,
         maxPrice: maxPrice || null,

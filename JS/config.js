@@ -1,7 +1,6 @@
 // API Configuration
 const CONFIG = {
-  API_URL: 'http://localhost:4000',
-  // For production, change to: 'https://moayd-backend-randxxt.vercel.app'
+  API_URL: 'https://electro-yussef-backend.vercel.app',
 
   // Store Settings
   STORE_NAME: 'Electro Youssef',

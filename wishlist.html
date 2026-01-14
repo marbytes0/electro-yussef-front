@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste de souhaits | Electro Youssef</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/components.css">
+    <link rel="stylesheet" href="CSS/pages.css">
+</head>
+
+<body>
+    <div class="cart-overlay" onclick="open_close_cart()"></div>
+    <div class="cart">
+        <div class="top_cart">
+            <h3>Panier : <span class="Count_item_cart">0</span></h3>
+            <span onclick="open_close_cart()" class="close_cart"><i class="fa-regular fa-circle-xmark"></i></span>
+        </div>
+        <div class="items_in_cart" id="cart_items"></div>
+        <div class="bottom_cart">
+            <div class="total">
+                <p>Sous-total</p>
+                <p class="price_cart_toral">0DH</p>
+            </div>
+            <div class="button_cart">
+                <a href="checkout.html" class="btn_cart btn">Commander</a>
+                <span onclick="open_close_cart()" class="btn_cart trans_bg btn">Continuer</span>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="top_header">
+            <div class="container">
+                <a href="index.html" class="logo"><img src="img/electro-logo.png" alt="Electro Youssef"></a>
+                <form action="search.html" method="GET" class="search_box">
+                    <div class="select_box">
+                        <select id="searchCategory" name="category">
+                            <option value="">Toutes les catégories</option>
+                        </select>
+                    </div>
+                    <input type="text" name="q" id="search" placeholder="Rechercher des produits" required>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="header_icons">
+                    <div class="icon">
+                        <a href="wishlist.html">
+                            <i class="fa-solid fa-heart"></i>
+                            <span class="count count_favourite">0</span>
+                        </a>
+                    </div>
+                    <div onclick="open_close_cart()" class="icon">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="count count_item_header">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_header">
+            <div class="container">
+                <nav class="nav">
+                    <span onclick="open_Menu()" class="open_menu"><i class="fa-solid fa-bars"></i></span>
+                    <div class="menu-overlay" onclick="open_Menu()"></div>
+                    <div class="category_nav">
+                        <div onclick="Open_Categ_list()" class="category_btn">
+                            <i class="fa-solid fa-bars"></i>
+                            <p>Catégories</p>
+                            <i class="fa-solid fa-angle-down"></i>
+                        </div>
+                        <div class="category_nav_list" id="categoryNavList"></div>
+                    </div>
+                    <ul class="nav_links">
+                        <span onclick="open_Menu()" class="close_menu"><i class="fa-regular fa-circle-xmark"></i></span>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="products.html">Boutique</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="login_signup btns"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="wishlist-page">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Accueil</a>
+                <span>/</span>
+                <span class="current">Liste de souhaits</span>
+            </div>
+            <div class="wishlist-header">
+                <div class="wishlist-title">
+                    <h1>Ma Liste de Souhaits</h1>
+                    <span class="wishlist-count" id="wishlistCount">0 articles</span>
+                </div>
+                <button id="clearWishlist" class="clear-btn" style="display: none;">
+                    <i class="fa-solid fa-trash"></i> Tout supprimer
+                </button>
+            </div>
+            <div class="wishlist-grid" id="wishlistGrid">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="big_row">
+                <img class="logo_footer" src="img/electro-logo.png" alt="">
+                <p>Votre boutique unique pour des produits de qualité à bon prix.</p>
+                <div class="icons_footer">
+                    <a href="#"><i class="fa-solid fa-phone"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Trouver Rapidement</h4>
+                <div class="links" id="footerCategories">
+                    <a href="products.html"><i class="fa-solid fa-caret-right"></i> Tous les produits</a>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Liens Rapides</h4>
+                <div class="links">
+                    <a href="account.html"><i class="fa-solid fa-caret-right"></i> Votre Compte</a>
+                    <a href="orders.html"><i class="fa-solid fa-caret-right"></i> Vos Commandes</a>
+                    <a href="track-order.html"><i class="fa-solid fa-caret-right"></i> Suivre ma commande</a>
+                    <a href="wishlist.html"><i class="fa-solid fa-caret-right"></i> Liste de souhaits</a>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Aide & Support</h4>
+                <div class="links">
+                    <a href="contact.html"><i class="fa-solid fa-caret-right"></i> Contactez-nous</a>
+                    <a href="about.html"><i class="fa-solid fa-caret-right"></i> À propos</a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="container">
+                <p>&copy; <span>Electro Youssef.</span> Tous droits réservés.</p>
+                <div class="payment_img"><img src="img/payment_method.png" alt=""></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JS/config.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+    <script src="JS/cart.js"></script>
+    <script src="JS/wishlist.js"></script>
+    <script src="JS/ui.js"></script>
+    <script src="JS/main.js"></script>
+    <script>
+        function renderWishlistPage() {
+            const items = wishlist.getWishlist();
+            const container = document.getElementById('wishlistGrid');
+            const countEl = document.getElementById('wishlistCount');
+            const clearBtn = document.getElementById('clearWishlist');
+
+            countEl.textContent = `${items.length} article${items.length !== 1 ? 's' : ''}`;
+
+            if (items.length === 0) {
+                clearBtn.style.display = 'none';
+                container.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <i class="fa-regular fa-heart"></i>
+                        <h3>Votre liste de souhaits est vide</h3>
+                        <p>Enregistrez les articles que vous aimez en cliquant sur l'icône cœur.</p>
+                        <a href="products.html" class="btn">Parcourir les produits</a>
+                    </div>
+                `;
+            } else {
+                clearBtn.style.display = 'flex';
+                container.innerHTML = items.map(product => createWishlistCard(product)).join('');
+            }
+        }
+
+        function createWishlistCard(product) {
+            const isInCart = window.cart?.isInCart(product._id);
+            const discount = UI.getDiscountPercent(product.oldPrice, product.price);
+            const imageUrl = product.image?.[0] || product.img || 'img/placeholder.png';
+
+            return `
+                <div class="product" data-id="${product._id}">
+                    ${discount > 0 ? `<span class="sale_present">-${discount}%</span>` : ''}
+                    <div class="img_product">
+                        <a href="product.html?id=${product._id}">
+                            <img src="${imageUrl}" alt="${product.name}">
+                        </a>
+                        <button class="wishlist_btn active" onclick="removeFromWishlist('${product._id}')">
+                            <i class="fa-solid fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product_content">
+                        <div class="stars">${UI.getStarsHTML(product.rating || 5)}</div>
+                        <p class="name_product">
+                            <a href="product.html?id=${product._id}">${UI.truncateText(product.name, 50)}</a>
+                        </p>
+                        <div class="price">
+                            <p>${UI.formatPrice(product.price)}</p>
+                            ${product.oldPrice ? `<p class="old_price">${UI.formatPrice(product.oldPrice)}</p>` : ''}
+                        </div>
+                        <div class="icons">
+                            <span class="btn_add_cart ${isInCart ? 'active' : ''}" onclick="addToCartFromWishlist('${product._id}')">
+                                <i class="fa-solid fa-${isInCart ? 'check' : 'cart-shopping'}"></i> ${isInCart ? 'Ajouté' : 'Ajouter au panier'}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function removeFromWishlist(productId) {
+            wishlist.removeItem(productId);
+            renderWishlistPage();
+            UI.showToast('Retiré de la liste de souhaits', 'info');
+        }
+
+        function addToCartFromWishlist(productId) {
+            const items = wishlist.getWishlist();
+            const product = items.find(p => p._id === productId);
+            if (product) {
+                if (cart.isInCart(productId)) {
+                    cart.removeItem(productId);
+                } else {
+                    cart.addItem(product);
+                }
+                renderWishlistPage();
+            }
+        }
+
+        function clearAllWishlist() {
+            if (confirm('Êtes-vous sûr de vouloir vider votre liste de souhaits ?')) {
+                wishlist.clear();
+                renderWishlistPage();
+                UI.showToast('Liste de souhaits vidée', 'info');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderWishlistPage();
+            document.getElementById('clearWishlist').addEventListener('click', clearAllWishlist);
+        });
+    </script>
+</body>
+
+</html>

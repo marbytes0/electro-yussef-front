@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique | Electro Youssef</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/components.css">
+    <link rel="stylesheet" href="CSS/components.css">
+    <link rel="stylesheet" href="CSS/pages.css">
+    <link rel="stylesheet" href="CSS/custom-cards.css">
+    <style>
+        /* Mobile-First Grid & Card Redesign */
+        :root {
+            --main_color: #2563eb;
+            --main_color_light: #eff6ff;
+            --border_radius: 8px;
+            /* Reduced from 12px */
+        }
+
+        /* Grid Layout */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 15px;
+            /* Slightly increased gap for breathing room */
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 10px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 20px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(4, 1fr) !important;
+                gap: 24px;
+            }
+        }
+
+        /* Improved Mobile Filters */
+        @media (max-width: 768px) {
+            .products-page .container {
+                flex-direction: column;
+                position: relative;
+            }
+
+            .products-sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+                background: #fff;
+                border: 1px solid #e2e8f0;
+                border-radius: var(--border_radius);
+                padding: 15px;
+                display: none;
+                /* Hidden by default on mobile */
+            }
+
+            .products-sidebar.active {
+                display: block;
+                animation: slideDown 0.3s ease-out;
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .products-sidebar h4 {
+                font-size: 14px;
+                margin-bottom: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                cursor: pointer;
+            }
+
+            /* Compact form groups row on mobile */
+            .filter-section .form-group {
+                display: inline-block;
+                width: 48%;
+            }
+
+            .filter-section button {
+                margin-top: 10px;
+            }
+
+            /* Mobile Filter Toggle Button */
+            .mobile-filter-toggle {
+                display: flex !important;
+                align-items: center;
+                gap: 8px;
+                background: #fff;
+                border: 1px solid #e2e8f0;
+                padding: 10px 15px;
+                width: 100%;
+                border-radius: var(--border_radius);
+                margin-bottom: 15px;
+                font-weight: 600;
+                color: #334155;
+                cursor: pointer;
+            }
+
+            .mobile-filter-toggle i {
+                color: var(--main_color);
+            }
+        }
+
+        .mobile-filter-toggle {
+            display: none;
+        }
+
+        /* Product Card Styles moved to CSS/custom-cards.css */
+    </style>
+</head>
+
+<body>
+    <div class="cart">
+        <div class="top_cart">
+            <h3>Panier : <span class="Count_item_cart">0</span></h3>
+            <span onclick="open_close_cart()" class="close_cart"><i class="fa-regular fa-circle-xmark"></i></span>
+        </div>
+        <div class="items_in_cart" id="cart_items"></div>
+        <div class="bottom_cart">
+            <div class="total">
+                <p>Sous-total</p>
+                <p class="price_cart_toral">0DH</p>
+            </div>
+            <div class="button_cart">
+                <a href="checkout.html" class="btn_cart btn">Commander</a>
+                <span onclick="open_close_cart()" class="btn_cart trans_bg btn">Continuer mes achats</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Header Simplification -->
+    <style>
+        @media (max-width: 768px) {
+            header .top_header .search_box {
+                display: none;
+                /* Hide confusing search on mobile if sticky header is small */
+            }
+
+            /* Add simple search icon toggle if needed later */
+        }
+    </style>
+
+    <header>
+        <div class="top_header" style="background:#fff;">
+            <div class="container" style="display:flex; justify-content:space-between; align-items:center;">
+                <a href="index.html" class="logo"><img src="img/electro-logo.png" alt="" style="height:40px;"></a>
+
+                <form action="search.html" method="GET" class="search_box"
+                    style="flex:1; max-width:500px; margin:0 20px;">
+                    <div class="select_box">
+                        <select id="category" name="category">
+                            <option value="">Toutes les catégories</option>
+                        </select>
+                    </div>
+                    <input type="text" name="q" id="search" placeholder="Rechercher des produits" required>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+
+                <div class="header_icons">
+                    <div class="icon">
+                        <a href="wishlist.html">
+                            <i class="fa-regular fa-heart"></i>
+                            <span class="count count_favourite">0</span>
+                        </a>
+                    </div>
+                    <div onclick="open_close_cart()" class="icon">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="count count_item_header">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_header">
+            <div class="container">
+                <nav class="nav">
+                    <span onclick="open_Menu()" class="open_menu"><i class="fa-solid fa-bars"></i></span>
+                    <ul class="nav_links">
+                        <span onclick="open_Menu()" class="close_menu"><i class="fa-regular fa-circle-xmark"></i></span>
+                        <li><a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a></li>
+                        <li class="active"><a href="products.html"><i class="fa-solid fa-shop"></i> Boutique</a></li>
+                        <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> À propos</a></li>
+                        <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+                        <li class="mobile-only-footer">
+                            <div class="mobile-menu-socials">
+                                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                            </div>
+                            <p class="mobile-menu-copyright">&copy; 2026 Electro Youssef</p>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="login_signup btns"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="products-page">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Accueil</a>
+                <span>/</span>
+                <span class="current">Boutique</span>
+            </div>
+        </div>
+        <div class="container">
+            <!-- Sidebar (Hidden on Mobile by CSS usually, ensuring strict grid) -->
+            <div class="mobile-filter-toggle" onclick="toggleMobileFilters()">
+                <i class="fa-solid fa-sliders"></i> Filtrer & Trier
+            </div>
+            <aside class="products-sidebar">
+                <div class="filter-section">
+                    <h4>Catégories</h4>
+                    <div id="categoryFilters"></div>
+                </div>
+                <div class="filter-section">
+                    <h4>Prix</h4>
+                    <div class="form-group">
+                        <input type="number" class="form-input" id="minPrice" placeholder="Min">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-input" id="maxPrice" placeholder="Max">
+                    </div>
+                    <button class="btn" onclick="applyFilters()"
+                        style="width:100%;justify-content:center;">Appliquer</button>
+                </div>
+            </aside>
+            <main class="products-main" style="width:100%;">
+                <div class="products-header">
+                    <span class="products-count" id="productsCount">Chargement...</span>
+                    <div class="products-sort">
+                        <select id="sortBy" onchange="applyFilters()">
+                            <option value="date">Nouveautés</option>
+                            <option value="price_asc">Prix : Bas à Haut</option>
+                            <option value="price_desc">Prix : Haut à Bas</option>
+                            <option value="name">Nom</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- FORCE GRID ID -->
+                <div class="products-grid" id="productsGrid"></div>
+                <div id="pagination"></div>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="big_row">
+                <img class="logo_footer" src="img/electro-logo.png" alt="">
+                <p>Votre boutique unique pour des produits de qualité à bon prix.</p>
+                <div class="icons_footer">
+                    <a href="#"><i class="fa-solid fa-phone"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Liens Rapides</h4>
+                <div class="links">
+                    <a href="index.html"><i class="fa-solid fa-caret-right"></i> Accueil</a>
+                    <a href="products.html"><i class="fa-solid fa-caret-right"></i> Boutique</a>
+                    <a href="about.html"><i class="fa-solid fa-caret-right"></i> À propos</a>
+                    <a href="contact.html"><i class="fa-solid fa-caret-right"></i> Contact</a>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Service Client</h4>
+                <div class="links">
+                    <a href="account.html"><i class="fa-solid fa-caret-right"></i> Mon Compte</a>
+                    <a href="orders.html"><i class="fa-solid fa-caret-right"></i> Mes Commandes</a>
+                    <a href="track-order.html"><i class="fa-solid fa-caret-right"></i> Suivre ma commande</a>
+                    <a href="wishlist.html"><i class="fa-solid fa-caret-right"></i> Liste de souhaits</a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="container">
+                <p>&copy; <span>Electro Youssef.</span> Tous droits réservés.</p>
+                <div class="payment_img"><img src="img/payment_method.png" alt=""></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JS/config.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+    <script src="JS/cart.js"></script>
+    <script src="JS/wishlist.js"></script>
+    <script src="JS/ui.js"></script>
+    <script src="JS/main.js"></script>
+    <script src="JS/products-page.js"></script>
+</body>
+
+</html>

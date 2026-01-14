@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electro Youssef | Achat en ligne</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/components.css">
+    <link rel="stylesheet" href="CSS/pages.css">
+</head>
+
+<body>
+    <div class="cart-overlay" onclick="open_close_cart()"></div>
+    <div class="cart">
+        <div class="top_cart">
+            <h3>Panier : <span class="Count_item_cart">0</span></h3>
+            <span onclick="open_close_cart()" class="close_cart"><i class="fa-regular fa-circle-xmark"></i></span>
+        </div>
+        <div class="items_in_cart" id="cart_items"></div>
+        <div class="bottom_cart">
+            <div class="total">
+                <p>Sous-total</p>
+                <p class="price_cart_toral">0DH</p>
+            </div>
+            <div class="button_cart">
+                <a href="checkout.html" class="btn_cart btn">Commander</a>
+                <span onclick="open_close_cart()" class="btn_cart trans_bg btn">Continuer mes achats</span>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="top_header">
+            <div class="container">
+                <a href="index.html" class="logo"><img src="img/electro-logo.png" alt="Electro Youssef"></a>
+                <form action="search.html" method="GET" class="search_box">
+                    <div class="select_box">
+                        <select id="searchCategory" name="category">
+                            <option value="">Toutes les catégories</option>
+                        </select>
+                    </div>
+                    <input type="text" name="q" id="search" placeholder="Rechercher des produits" required>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="header_icons">
+                    <div class="icon">
+                        <a href="wishlist.html">
+                            <i class="fa-regular fa-heart"></i>
+                            <span class="count count_favourite">0</span>
+                        </a>
+                    </div>
+                    <div onclick="open_close_cart()" class="icon">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="count count_item_header">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom_header">
+            <div class="container">
+                <nav class="nav">
+                    <span onclick="open_Menu()" class="open_menu"><i class="fa-solid fa-bars"></i></span>
+                    <div class="menu-overlay" onclick="open_Menu()"></div>
+                    <div class="category_nav">
+                        <div onclick="Open_Categ_list()" class="category_btn">
+                            <i class="fa-solid fa-bars"></i>
+                            <p>Catégories</p>
+                            <i class="fa-solid fa-angle-down"></i>
+                        </div>
+                        <div class="category_nav_list" id="categoryNavList"></div>
+                    </div>
+                    <ul class="nav_links">
+                        <span onclick="open_Menu()" class="close_menu"><i class="fa-regular fa-circle-xmark"></i></span>
+                        <li class="active"><a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a></li>
+                        <li><a href="products.html"><i class="fa-solid fa-shop"></i> Boutique</a></li>
+                        <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> À propos</a></li>
+                        <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+                        <li class="mobile-only-footer">
+                            <div class="mobile-menu-socials">
+                                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                            </div>
+                            <p class="mobile-menu-copyright">&copy; 2026 Electro Youssef</p>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="login_signup btns"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="slider">
+        <div class="container">
+            <div class="slide-swp mySwiper">
+                <div class="swiper-wrapper" id="heroSlider">
+                    <div class="swiper-slide"><a href="products.html"><img src="img/banner_home1.png" alt=""></a></div>
+                    <div class="swiper-slide"><a href="products.html"><img src="img/banner_home2.png" alt=""></a></div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="banner_2">
+                <a href="products.html"><img src="img/banner_home3.png" alt=""></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="banners_4">
+        <div class="container" id="promoBanners">
+            <div class="box">
+                <a href="products.html" class="link_btn"></a>
+                <img src="img/banner3_1.png" alt="">
+                <div class="text">
+                    <h5>Super Offres</h5>
+                    <h5>Achetez Maintenant</h5>
+                    <div class="sale">
+                        <p>Jusqu'à</p><span>70%</span>
+                    </div>
+                    <h6>Profitez-en</h6>
+                </div>
+            </div>
+            <div class="box">
+                <a href="products.html" class="link_btn"></a>
+                <img src="img/banner3_2.png" alt="">
+                <div class="text">
+                    <h5>Nouveautés</h5>
+                    <h5>Découvrir</h5>
+                    <div class="sale">
+                        <p>Jusqu'à</p><span>50%</span>
+                    </div>
+                    <h6>Profitez</h6>
+                </div>
+            </div>
+            <div class="box">
+                <a href="products.html" class="link_btn"></a>
+                <img src="img/banner3_3.png" alt="">
+                <div class="text">
+                    <h5>Meilleures Ventes</h5>
+                    <h5>Top Choix</h5>
+                    <div class="sale">
+                        <p>Jusqu'à</p><span>40%</span>
+                    </div>
+                    <h6>Profitez</h6>
+                </div>
+            </div>
+            <div class="box">
+                <a href="products.html" class="link_btn"></a>
+                <img src="img/banner3_4.png" alt="">
+                <div class="text">
+                    <h5>Ventes Flash</h5>
+                    <h5>Temps Limité</h5>
+                    <div class="sale">
+                        <p>Jusqu'à</p><span>60%</span>
+                    </div>
+                    <h6>Profitez</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slider_products slide">
+        <div class="container">
+            <div class="slide_product mySwiper">
+                <div class="top_slide">
+                    <h2><i class="fa-solid fa-fire"></i> Offres du moment</h2>
+                </div>
+                <div class="products swiper-wrapper" id="swiper_items_sale"></div>
+                <div class="swiper-button-next btn_Swip"></div>
+                <div class="swiper-button-prev btn_Swip"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="banners">
+        <div class="container">
+            <div class="banners_boxs banner_2_img">
+                <a href="products.html" class="box"><img src="img/banner_box4.jpg" alt=""></a>
+                <a href="products.html" class="box"><img src="img/banner_box5.jpg" alt=""></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dynamic Category Sections Container -->
+    <div id="categorySections"></div>
+
+    <div class="banners">
+        <div class="container">
+            <div class="banners_boxs banner_3_img">
+                <a href="products.html" class="box"><img src="img/banner_box1.jpg" alt=""></a>
+                <a href="products.html" class="box"><img src="img/banner_box2.jpg" alt=""></a>
+                <a href="products.html" class="box"><img src="img/banner_box3.jpg" alt=""></a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="big_row">
+                <img class="logo_footer" src="img/electro-logo.png" alt="">
+                <p>Votre boutique unique pour des produits de qualité à bon prix.</p>
+                <div class="icons_footer">
+                    <a href="#"><i class="fa-solid fa-phone"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Trouver Rapidement</h4>
+                <div class="links" id="footerCategories">
+                    <a href="products.html"><i class="fa-solid fa-caret-right"></i> Tous les produits</a>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Liens Rapides</h4>
+                <div class="links">
+                    <a href="account.html"><i class="fa-solid fa-caret-right"></i> Votre Compte</a>
+                    <a href="orders.html"><i class="fa-solid fa-caret-right"></i> Vos Commandes</a>
+                    <a href="track-order.html"><i class="fa-solid fa-caret-right"></i> Suivre ma commande</a>
+                    <a href="wishlist.html"><i class="fa-solid fa-caret-right"></i> Liste de souhaits</a>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Aide & Support</h4>
+                <div class="links">
+                    <a href="contact.html"><i class="fa-solid fa-caret-right"></i> Contactez-nous</a>
+                    <a href="about.html"><i class="fa-solid fa-caret-right"></i> À propos</a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="container">
+                <p>&copy; <span>Electro Youssef.</span> Tous droits réservés.</p>
+                <div class="payment_img"><img src="img/payment_method.png" alt=""></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="JS/config.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+    <script src="JS/cart.js"></script>
+    <script src="JS/wishlist.js"></script>
+    <script src="JS/ui.js"></script>
+    <script src="JS/swiper.js"></script>
+    <script src="JS/main.js"></script>
+    <script src="JS/items_home.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Commandes | Electro Youssef</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/components.css">
+    <link rel="stylesheet" href="CSS/pages.css">
+</head>
+
+<body>
+    <div class="cart">
+        <div class="top_cart">
+            <h3>Panier : <span class="Count_item_cart">0</span></h3>
+            <span onclick="open_close_cart()" class="close_cart"><i class="fa-regular fa-circle-xmark"></i></span>
+        </div>
+        <div class="items_in_cart" id="cart_items"></div>
+        <div class="bottom_cart">
+            <div class="total">
+                <p>Sous-total</p>
+                <p class="price_cart_toral">0DH</p>
+            </div>
+            <div class="button_cart">
+                <a href="checkout.html" class="btn_cart btn">Commander</a>
+                <span onclick="open_close_cart()" class="btn_cart trans_bg btn">Continuer mes achats</span>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="top_header">
+            <div class="container">
+                <a href="index.html" class="logo"><img src="img/electro-logo.png" alt="Electro Youssef"></a>
+                <form action="search.html" method="GET" class="search_box">
+                    <div class="select_box"><select id="category" name="category">
+                            <option value="">Toutes les catégories</option>
+                        </select></div>
+                    <input type="text" name="q" id="search" placeholder="Rechercher des produits" required>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="header_icons">
+                    <div class="icon"><a href="wishlist.html"><i class="fa-regular fa-heart"></i><span
+                                class="count count_favourite">0</span></a></div>
+                    <div onclick="open_close_cart()" class="icon"><i class="fa-solid fa-cart-shopping"></i><span
+                            class="count count_item_header">0</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_header">
+            <div class="container">
+                <nav class="nav">
+                    <span onclick="open_Menu()" class="open_menu"><i class="fa-solid fa-bars"></i></span>
+                    <ul class="nav_links">
+                        <span onclick="open_Menu()" class="close_menu"><i class="fa-regular fa-circle-xmark"></i></span>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="products.html">Boutique</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="login_signup btns"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="account-page">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Accueil</a><span>/</span><a href="account.html">Compte</a><span>/</span><span
+                    class="current">Commandes</span>
+            </div>
+        </div>
+        <div class="container">
+            <aside class="account-sidebar">
+                <div class="account-menu">
+                    <a href="account.html"><i class="fa-regular fa-user"></i> Profil</a>
+                    <a href="orders.html" class="active"><i class="fa-solid fa-box"></i> Mes Commandes</a>
+                    <a href="wishlist.html"><i class="fa-regular fa-heart"></i> Liste de souhaits</a>
+                    <a href="track-order.html"><i class="fa-solid fa-truck"></i> Suivre commande</a>
+                    <a href="#" onclick="auth.logout(); return false;"><i class="fa-solid fa-right-from-bracket"></i>
+                        Déconnexion</a>
+                </div>
+            </aside>
+            <main class="account-main">
+                <h2 style="margin-bottom: 20px;">Mes Commandes</h2>
+                <div id="ordersContainer"></div>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="big_row"><img class="logo_footer" src="img/electro-logo.png" alt=""></div>
+        </div>
+        <div class="bottom_footer">
+            <div class="container">
+                <p>&copy; <span>Electro Youssef.</span> Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JS/config.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+    <script src="JS/cart.js"></script>
+    <script src="JS/wishlist.js"></script>
+    <script src="JS/ui.js"></script>
+    <script src="JS/main.js"></script>
+    <script>
+        async function loadOrders() {
+            if (!auth.isLoggedIn()) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const container = document.getElementById('ordersContainer');
+            container.innerHTML = '<div class="skeleton skeleton-text" style="height:100px;margin-bottom:15px;"></div>'.repeat(3);
+
+            const result = await api.getUserOrders();
+
+            if (result.success && result.orders?.length > 0) {
+                container.innerHTML = result.orders.sort((a, b) => b.date - a.date).map(order => {
+                    const statusClass = order.status === 'Delivered' ? 'success' : order.status === 'Cancelled' ? 'error' : 'info';
+                    const statusText = {
+                        'Order Placed': 'Commande passée',
+                        'Processing': 'En traitement',
+                        'Shipped': 'Expédiée',
+                        'Out for Delivery': 'En livraison',
+                        'Delivered': 'Livrée',
+                        'Cancelled': 'Annulée'
+                    }[order.status] || order.status;
+                    return `
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div>
+                                    <strong>Commande #${order._id.slice(-8).toUpperCase()}</strong>
+                                    <p style="font-size:13px;color:var(--p_color);">${UI.formatDate(order.date)}</p>
+                                </div>
+                                <span class="badge badge-${statusClass}">${statusText}</span>
+                            </div>
+                            <div class="order-body">
+                                <div class="order-items">
+                                    ${order.items.map(item => `
+                                        <img src="${item.image?.[0] || item.img || 'img/placeholder.png'}" alt="${item.name}" class="order-item-thumb">
+                                    `).join('')}
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:15px;">
+                                    <span>${order.items.length} article(s) • ${UI.formatPrice(order.amount)}</span>
+                                    <a href="track-order.html?id=${order._id}" class="btn" style="padding:8px 16px;">Suivre</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                container.innerHTML = `
+                    <div class="empty-state card">
+                        <i class="fa-solid fa-box-open"></i>
+                        <h3>Aucune commande</h3>
+                        <p>Vos commandes apparaîtront ici.</p>
+                        <a href="products.html" class="btn">Commencer mes achats</a>
+                    </div>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadOrders);
+    </script>
+</body>
+
+</html>

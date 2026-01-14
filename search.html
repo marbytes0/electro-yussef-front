@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultats de recherche | Electro Youssef</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/components.css">
+    <link rel="stylesheet" href="CSS/pages.css">
+</head>
+
+<body>
+    <div class="cart">
+        <div class="top_cart">
+            <h3>Panier : <span class="Count_item_cart">0</span></h3>
+            <span onclick="open_close_cart()" class="close_cart"><i class="fa-regular fa-circle-xmark"></i></span>
+        </div>
+        <div class="items_in_cart" id="cart_items"></div>
+        <div class="bottom_cart">
+            <div class="total">
+                <p>Sous-total</p>
+                <p class="price_cart_toral">0DH</p>
+            </div>
+            <div class="button_cart">
+                <a href="checkout.html" class="btn_cart btn">Commander</a>
+                <span onclick="open_close_cart()" class="btn_cart trans_bg btn">Continuer mes achats</span>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="top_header">
+            <div class="container">
+                <a href="index.html" class="logo"><img src="img/electro-logo.png" alt="Electro Youssef"></a>
+                <form action="search.html" method="GET" class="search_box">
+                    <div class="select_box"><select id="category" name="category">
+                            <option value="">Toutes les catégories</option>
+                        </select></div>
+                    <input type="text" name="q" id="searchInput" placeholder="Rechercher des produits" required>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="header_icons">
+                    <div class="icon"><a href="wishlist.html"><i class="fa-regular fa-heart"></i><span
+                                class="count count_favourite">0</span></a></div>
+                    <div onclick="open_close_cart()" class="icon"><i class="fa-solid fa-cart-shopping"></i><span
+                            class="count count_item_header">0</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_header">
+            <div class="container">
+                <nav class="nav">
+                    <span onclick="open_Menu()" class="open_menu"><i class="fa-solid fa-bars"></i></span>
+                    <ul class="nav_links">
+                        <span onclick="open_Menu()" class="close_menu"><i class="fa-regular fa-circle-xmark"></i></span>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="products.html">Boutique</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="login_signup btns"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="search-page">
+        <div class="container">
+            <div class="search-header">
+                <h1>Résultats de recherche</h1>
+                <p id="searchInfo">Recherche en cours...</p>
+            </div>
+            <div class="products-grid" id="searchResults"></div>
+            <div id="pagination"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="big_row"><img class="logo_footer" src="img/electro-logo.png" alt=""></div>
+        </div>
+        <div class="bottom_footer">
+            <div class="container">
+                <p>&copy; <span>Electro Youssef.</span> Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JS/config.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+    <script src="JS/cart.js"></script>
+    <script src="JS/wishlist.js"></script>
+    <script src="JS/ui.js"></script>
+    <script src="JS/main.js"></script>
+    <script>
+        async function performSearch() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q') || '';
+            const category = urlParams.get('category') || '';
+
+            document.getElementById('searchInput').value = query;
+
+            const container = document.getElementById('searchResults');
+            const infoEl = document.getElementById('searchInfo');
+
+            container.innerHTML = '<div class="skeleton skeleton-image"></div>'.repeat(8);
+
+            const result = await api.searchProducts(query, { category, limit: 24 });
+
+            if (result.success && result.products?.length > 0) {
+                infoEl.textContent = `${result.products.length} résultat(s) pour "${query}"`;
+                container.innerHTML = result.products.map(product => UI.createProductCard(product)).join('');
+            } else {
+                infoEl.textContent = `Aucun résultat pour "${query}"`;
+                container.innerHTML = `
+                    <div class="empty-state" style="grid-column:1/-1;">
+                        <i class="fa-solid fa-search"></i>
+                        <h3>Aucun produit trouvé</h3>
+                        <p>Essayez d'autres mots-clés ou parcourez nos catégories</p>
+                        <a href="products.html" class="btn">Voir tous les produits</a>
+                    </div>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', performSearch);
+    </script>
+</body>
+
+</html>

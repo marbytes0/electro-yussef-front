@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À propos | Electro Youssef</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/components.css">
+    <link rel="stylesheet" href="CSS/pages.css">
+</head>
+
+<body>
+    <div class="cart">
+        <div class="top_cart">
+            <h3>Panier : <span class="Count_item_cart">0</span></h3>
+            <span onclick="open_close_cart()" class="close_cart"><i class="fa-regular fa-circle-xmark"></i></span>
+        </div>
+        <div class="items_in_cart" id="cart_items"></div>
+        <div class="bottom_cart">
+            <div class="total">
+                <p>Sous-total</p>
+                <p class="price_cart_toral">0DH</p>
+            </div>
+            <div class="button_cart">
+                <a href="checkout.html" class="btn_cart btn">Commander</a>
+                <span onclick="open_close_cart()" class="btn_cart trans_bg btn">Continuer mes achats</span>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="top_header">
+            <div class="container">
+                <a href="index.html" class="logo"><img src="img/electro-logo.png" alt="Electro Youssef"></a>
+                <form action="search.html" method="GET" class="search_box">
+                    <div class="select_box"><select id="category" name="category">
+                            <option value="">Toutes catégories</option>
+                        </select></div>
+                    <input type="text" name="q" id="search" placeholder="Rechercher un produit..." required>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="header_icons">
+                    <div class="icon"><a href="wishlist.html"><i class="fa-regular fa-heart"></i><span
+                                class="count count_favourite">0</span></a></div>
+                    <div onclick="open_close_cart()" class="icon"><i class="fa-solid fa-cart-shopping"></i><span
+                            class="count count_item_header">0</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_header">
+            <div class="container">
+                <nav class="nav">
+                    <span onclick="open_Menu()" class="open_menu"><i class="fa-solid fa-bars"></i></span>
+                    <ul class="nav_links">
+                        <span onclick="open_Menu()" class="close_menu"><i class="fa-regular fa-circle-xmark"></i></span>
+                        <li><a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a></li>
+                        <li><a href="products.html"><i class="fa-solid fa-shop"></i> Boutique</a></li>
+                        <li class="active"><a href="about.html"><i class="fa-solid fa-circle-info"></i> À propos</a></li>
+                        <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="login_signup btns"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section style="background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 50%,#3b82f6 100%);padding:80px 20px;text-align:center;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2220%22 cy=%2220%22 r=%222%22 fill=%22white%22 opacity=%220.1%22/><circle cx=%2280%22 cy=%2240%22 r=%223%22 fill=%22white%22 opacity=%220.1%22/><circle cx=%2240%22 cy=%2280%22 r=%222%22 fill=%22white%22 opacity=%220.1%22/></svg>');"></div>
+        <div class="container" style="position:relative;z-index:1;">
+            <div style="display:inline-flex;align-items:center;justify-content:center;width:80px;height:80px;background:rgba(255,255,255,0.15);border-radius:20px;margin-bottom:24px;backdrop-filter:blur(10px);">
+                <i class="fa-solid fa-store" style="font-size:36px;color:white !important;"></i>
+            </div>
+            <h1 style="font-size:42px;font-weight:800;color:white;margin:0 0 16px 0;letter-spacing:-0.5px;">Electro Youssef</h1>
+            <p style="font-size:20px;color:rgba(255,255,255,0.9);max-width:600px;margin:0 auto;line-height:1.6;">
+                Votre référence technologique de confiance au Maroc
+            </p>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div style="background:#f8fafc;padding:16px 0;border-bottom:1px solid #e2e8f0;">
+        <div class="container">
+            <div style="display:flex;align-items:center;gap:10px;font-size:14px;">
+                <a href="index.html" style="color:#64748b;text-decoration:none;">Accueil</a>
+                <i class="fa-solid fa-chevron-right" style="font-size:10px;color:#94a3b8 !important;"></i>
+                <span style="color:#1e293b;font-weight:500;">À propos</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Content -->
+    <section style="padding:80px 0;background:white;">
+        <div class="container">
+            <!-- Who We Are -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-bottom:100px;">
+                <div>
+                    <span style="display:inline-block;background:#eff6ff;color:#2563eb;padding:8px 16px;border-radius:50px;font-size:13px;font-weight:600;margin-bottom:20px;">
+                        Notre Histoire
+                    </span>
+                    <h2 style="font-size:36px;font-weight:700;color:#1e293b;margin:0 0 24px 0;line-height:1.2;">
+                        Qui Sommes-Nous ?
+                    </h2>
+                    <p style="color:#475569;line-height:1.8;margin-bottom:20px;font-size:16px;">
+                        Bienvenue chez <strong style="color:#1e293b;">Electro Youssef</strong>, votre destination privilégiée pour tous vos besoins en électronique et électroménager. Fondée avec la vision de démocratiser l'accès aux dernières technologies, notre enseigne s'engage à vous offrir une sélection rigoureuse de produits innovants et performants.
+                    </p>
+                    <p style="color:#475569;line-height:1.8;font-size:16px;margin-bottom:30px;">
+                        Notre mission est simple : allier qualité irréprochable et prix compétitifs, tout en garantissant un service client attentionné. Que vous soyez un passionné de high-tech ou à la recherche d'équipements essentiels pour votre maison, nous sommes là pour vous accompagner.
+                    </p>
+                    
+                </div>
+                <div style="position:relative;">
+                    <div style="background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border-radius:24px;padding:40px;position:relative;overflow:hidden;">
+                        <div style="position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:#2563eb;opacity:0.1;border-radius:50%;"></div>
+                        <div style="position:absolute;bottom:-30px;left:-30px;width:150px;height:150px;background:#2563eb;opacity:0.1;border-radius:50%;"></div>
+                        <div style="text-align:center;position:relative;z-index:1;">
+                            <i class="fa-solid fa-building" style="font-size:120px;color:#2563eb !important;opacity:0.3;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Choose Us -->
+            <div style="text-align:center;margin-bottom:50px;">
+                <span style="display:inline-block;background:#eff6ff;color:#2563eb;padding:8px 16px;border-radius:50px;font-size:13px;font-weight:600;margin-bottom:16px;">
+                    Nos Avantages
+                </span>
+                <h2 style="font-size:36px;font-weight:700;color:#1e293b;margin:0;">
+                    Pourquoi Nous Choisir ?
+                </h2>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:100px;">
+                <!-- Feature 1 -->
+                <div style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:32px 24px;text-align:center;transition:all 0.3s;"
+                     onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 20px 40px rgba(0,0,0,0.1)';this.style.borderColor='#2563eb';"
+                     onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='#e2e8f0';">
+                    <div style="width:70px;height:70px;background:linear-gradient(135deg,#eff6ff,#dbeafe);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+                        <i class="fa-solid fa-medal" style="font-size:28px;color:#2563eb !important;"></i>
+                    </div>
+                    <h3 style="font-size:18px;font-weight:600;color:#1e293b;margin:0 0 12px 0;">Qualité Garantie</h3>
+                    <p style="color:#64748b;font-size:14px;line-height:1.6;margin:0;">
+                        Tous nos produits sont authentiques et couverts par une garantie officielle.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:32px 24px;text-align:center;transition:all 0.3s;"
+                     onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 20px 40px rgba(0,0,0,0.1)';this.style.borderColor='#2563eb';"
+                     onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='#e2e8f0';">
+                    <div style="width:70px;height:70px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+                        <i class="fa-solid fa-truck-fast" style="font-size:28px;color:#16a34a !important;"></i>
+                    </div>
+                    <h3 style="font-size:18px;font-weight:600;color:#1e293b;margin:0 0 12px 0;">Livraison Rapide</h3>
+                    <p style="color:#64748b;font-size:14px;line-height:1.6;margin:0;">
+                        Expédition sécurisée partout au Maroc dans les meilleurs délais.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:32px 24px;text-align:center;transition:all 0.3s;"
+                     onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 20px 40px rgba(0,0,0,0.1)';this.style.borderColor='#2563eb';"
+                     onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='#e2e8f0';">
+                    <div style="width:70px;height:70px;background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+                        <i class="fa-solid fa-headset" style="font-size:28px;color:#d97706 !important;"></i>
+                    </div>
+                    <h3 style="font-size:18px;font-weight:600;color:#1e293b;margin:0 0 12px 0;">Service Client</h3>
+                    <p style="color:#64748b;font-size:14px;line-height:1.6;margin:0;">
+                        Une équipe dédiée disponible pour répondre à toutes vos questions.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:32px 24px;text-align:center;transition:all 0.3s;"
+                     onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 20px 40px rgba(0,0,0,0.1)';this.style.borderColor='#2563eb';"
+                     onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='#e2e8f0';">
+                    <div style="width:70px;height:70px;background:linear-gradient(135deg,#fce7f3,#fbcfe8);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+                        <i class="fa-solid fa-wallet" style="font-size:28px;color:#db2777 !important;"></i>
+                    </div>
+                    <h3 style="font-size:18px;font-weight:600;color:#1e293b;margin:0 0 12px 0;">Meilleur Prix</h3>
+                    <p style="color:#64748b;font-size:14px;line-height:1.6;margin:0;">
+                        Des tarifs compétitifs et des promotions régulières toute l'année.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Our Values -->
+            
+
+            <!-- CTA Section -->
+            <div style="text-align:center;background:#eff6ff;border-radius:24px;padding:60px 40px;">
+                <h2 style="font-size:32px;font-weight:700;color:#1e293b;margin:0 0 16px 0;">
+                    Prêt à découvrir nos produits ?
+                </h2>
+                <p style="color:#64748b;font-size:16px;margin:0 0 30px 0;max-width:500px;margin-left:auto;margin-right:auto;">
+                    Explorez notre catalogue et trouvez les meilleurs produits électroniques aux meilleurs prix.
+                </p>
+                <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+                    <a href="products.html" style="display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:#2563eb;color:white;text-decoration:none;border-radius:12px;font-weight:600;font-size:15px;transition:all 0.3s;"
+                       onmouseover="this.style.background='#1d4ed8';this.style.transform='translateY(-2px)';"
+                       onmouseout="this.style.background='#2563eb';this.style.transform='translateY(0)';">
+                        <i class="fa-solid fa-shopping-bag" style="color:white !important;"></i>
+                        Voir la boutique
+                    </a>
+                    <a href="contact.html" style="display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:white;color:#1e293b;text-decoration:none;border-radius:12px;font-weight:600;font-size:15px;border:2px solid #e2e8f0;transition:all 0.3s;"
+                       onmouseover="this.style.borderColor='#2563eb';this.style.color='#2563eb';this.style.transform='translateY(-2px)';"
+                       onmouseout="this.style.borderColor='#e2e8f0';this.style.color='#1e293b';this.style.transform='translateY(0)';">
+                        <i class="fa-solid fa-envelope" style="color:inherit !important;"></i>
+                        Nous contacter
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Responsive Styles -->
+    <style>
+        @media (max-width: 1024px) {
+            .container > div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+            }
+            .container > div[style*="grid-template-columns:1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+            }
+            .container > div[style*="grid-template-columns:repeat(4,1fr)"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+        @media (max-width: 768px) {
+            .container > div[style*="grid-template-columns:repeat(4,1fr)"] {
+                grid-template-columns: 1fr !important;
+            }
+            .container > div[style*="grid-template-columns:repeat(3,1fr)"] {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+
+    <footer>
+        <div class="container">
+            <div class="big_row">
+                <img class="logo_footer" src="img/electro-logo.png" alt="">
+                <p>Votre boutique unique pour des produits de qualité à bon prix.</p>
+                <div class="icons_footer">
+                    <a href="#"><i class="fa-solid fa-phone"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Liens Rapides</h4>
+                <div class="links">
+                    <a href="index.html"><i class="fa-solid fa-caret-right"></i> Accueil</a>
+                    <a href="products.html"><i class="fa-solid fa-caret-right"></i> Boutique</a>
+                    <a href="about.html"><i class="fa-solid fa-caret-right"></i> À propos</a>
+                    <a href="contact.html"><i class="fa-solid fa-caret-right"></i> Contact</a>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Service Client</h4>
+                <div class="links">
+                    <a href="account.html"><i class="fa-solid fa-caret-right"></i> Mon Compte</a>
+                    <a href="orders.html"><i class="fa-solid fa-caret-right"></i> Mes Commandes</a>
+                    <a href="track-order.html"><i class="fa-solid fa-caret-right"></i> Suivre ma commande</a>
+                    <a href="wishlist.html"><i class="fa-solid fa-caret-right"></i> Liste de souhaits</a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="container">
+                <p>&copy; <span>Electro Youssef.</span> Tous droits réservés.</p>
+                <div class="payment_img"><img src="img/payment_method.png" alt=""></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JS/config.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+    <script src="JS/cart.js"></script>
+    <script src="JS/wishlist.js"></script>
+    <script src="JS/ui.js"></script>
+    <script src="JS/main.js"></script>
+</body>
+
+</html>

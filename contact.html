@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactez-nous | Electro Youssef</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/components.css">
+    <link rel="stylesheet" href="CSS/pages.css">
+    <style>
+        .contact-hero {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            border-radius: 16px;
+            margin-bottom: 50px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-form-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 30px;
+            height: fit-content;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            align-items: flex-start;
+        }
+
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563eb;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            flex-shrink: 0;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4b5563;
+            transition: all 0.3s;
+            border: 1px solid #e5e7eb;
+        }
+
+        .social-link:hover {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cart">
+        <div class="top_cart">
+            <h3>Panier : <span class="Count_item_cart">0</span></h3>
+            <span onclick="open_close_cart()" class="close_cart"><i class="fa-regular fa-circle-xmark"></i></span>
+        </div>
+        <div class="items_in_cart" id="cart_items"></div>
+        <div class="bottom_cart">
+            <div class="total">
+                <p>Sous-total</p>
+                <p class="price_cart_toral">0DH</p>
+            </div>
+            <div class="button_cart">
+                <a href="checkout.html" class="btn_cart btn">Commander</a>
+                <span onclick="open_close_cart()" class="btn_cart trans_bg btn">Continuer mes achats</span>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="top_header">
+            <div class="container">
+                <a href="index.html" class="logo"><img src="img/electro-logo.png" alt="Reda Store"></a>
+                <form action="search.html" method="GET" class="search_box">
+                    <div class="select_box"><select id="category" name="category">
+                            <option value="">Toutes catégories</option>
+                        </select></div>
+                    <input type="text" name="q" id="search" placeholder="Rechercher un produit..." required>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="header_icons">
+                    <div class="icon"><a href="wishlist.html"><i class="fa-regular fa-heart"></i><span
+                                class="count count_favourite">0</span></a></div>
+                    <div onclick="open_close_cart()" class="icon"><i class="fa-solid fa-cart-shopping"></i><span
+                            class="count count_item_header">0</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_header">
+            <div class="container">
+                <nav class="nav">
+                    <span onclick="open_Menu()" class="open_menu"><i class="fa-solid fa-bars"></i></span>
+                    <ul class="nav_links">
+                        <span onclick="open_Menu()" class="close_menu"><i class="fa-regular fa-circle-xmark"></i></span>
+                        <li><a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a></li>
+                        <li><a href="products.html"><i class="fa-solid fa-shop"></i> Boutique</a></li>
+                        <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> À propos</a></li>
+                        <li class="active"><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+                        <li class="mobile-only-footer">
+                            <div class="mobile-menu-socials">
+                                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                            </div>
+                            <p class="mobile-menu-copyright">&copy; 2026 Electro Youssef</p>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="contact-page" style="padding-top: 20px;">
+        <div class="container" style="display: block;">
+            <div class="breadcrumb" style="margin-bottom: 30px;">
+                <a href="index.html" style="color: #6b7280; text-decoration: none;">Accueil</a>
+                <span style="margin: 0 10px; color: #9ca3af;">/</span>
+                <span class="current" style="color: #1f2937; font-weight: 500;">Contact</span>
+            </div>
+
+            
+
+            <div class="contact-grid">
+                <div class="contact-form-card">
+                    <h2 style="font-size: 24px; margin-bottom: 5px; color: #1f2937;">Envoyez-nous un message</h2>
+                    <p style="margin-bottom: 25px; color: #6b7280; font-size: 14px;">Nous vous répondrons dans les plus
+                        brefs délais.</p>
+
+                    <form id="contactForm">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                            <div class="form-group">
+                                <label
+                                    style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">Nom
+                                    complet</label>
+                                <input type="text" id="name" required
+                                    style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; transition: border 0.3s;"
+                                    placeholder="Votre nom">
+                            </div>
+                            <div class="form-group">
+                                <label
+                                    style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">Email</label>
+                                <input type="email" id="email" required
+                                    style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; transition: border 0.3s;"
+                                    placeholder="Votre email">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label
+                                style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">Sujet</label>
+                            <input type="text" id="subject" required
+                                style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px;"
+                                placeholder="Sujet de votre message">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 25px;">
+                            <label
+                                style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">Message</label>
+                            <textarea id="message" required
+                                style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; min-height: 150px; resize: vertical;"
+                                placeholder="Comment pouvons-nous vous aider ?"></textarea>
+                        </div>
+                        <button type="submit" class="btn"
+                            style="width: 100%; justify-content: center; font-weight: 600; padding: 14px;">
+                            Envoyer le message <i class="fa-solid fa-paper-plane" style="margin-left: 8px;"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="info-card">
+                    <h3 style="font-size: 20px; margin-bottom: 25px; color: #1f2937;">Informations</h3>
+
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div>
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">Email</h4>
+                            <p style="color: #6b7280; font-size: 14px;">support@electroyoussef.ma</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fa-solid fa-clock"></i></div>
+                        <div>
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">Horaires</h4>
+                            <p style="color: #6b7280; font-size: 14px;">Lun - Sam: 09:00 - 20:00</p>
+                            <p style="color: #6b7280; font-size: 14px;">Dimanche: Fermé</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid #e5e7eb;">
+                        <h4 style="font-size: 16px; margin-bottom: 15px;">Suivez-nous</h4>
+                        <div style="display: flex; gap: 10px;">
+                            <a href="#" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fa-brands fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="big_row">
+                <img class="logo_footer" src="img/electro-logo.png" alt="">
+                <p>Votre boutique unique pour des produits de qualité à bon prix.</p>
+                <div class="icons_footer">
+                    <a href="#"><i class="fa-solid fa-phone"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Liens Rapides</h4>
+                <div class="links">
+                    <a href="index.html"><i class="fa-solid fa-caret-right"></i> Accueil</a>
+                    <a href="products.html"><i class="fa-solid fa-caret-right"></i> Boutique</a>
+                    <a href="about.html"><i class="fa-solid fa-caret-right"></i> À propos</a>
+                    <a href="contact.html"><i class="fa-solid fa-caret-right"></i> Contact</a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="container">
+                <p>&copy; <span>Electro Youssef.</span> Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JS/config.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+    <script src="JS/cart.js"></script>
+    <script src="JS/wishlist.js"></script>
+    <script src="JS/ui.js"></script>
+    <script src="JS/main.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            UI.showToast('Message envoyé avec succès! Nous vous répondrons bientôt.', 'success');
+            e.target.reset();
+        });
+    </script>
+</body>
+
+</html>

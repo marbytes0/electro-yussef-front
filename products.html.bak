@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | Reda Store</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/components.css">
+    <link rel="stylesheet" href="CSS/pages.css">
+</head>
+<body>
+    <div class="cart">
+        <div class="top_cart">
+            <h3>Cart Items : <span class="Count_item_cart">0</span></h3>
+            <span onclick="open_close_cart()" class="close_cart"><i class="fa-regular fa-circle-xmark"></i></span>
+        </div>
+        <div class="items_in_cart" id="cart_items"></div>
+        <div class="bottom_cart">
+            <div class="total">
+                <p>Subtotal</p>
+                <p class="price_cart_toral">$0</p>
+            </div>
+            <div class="button_cart">
+                <a href="checkout.html" class="btn_cart btn">Checkout</a>
+                <span onclick="open_close_cart()" class="btn_cart trans_bg btn">Shop More</span>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="top_header">
+            <div class="container">
+                <a href="index.html" class="logo"><img src="img/electro-logo.png" alt=""></a>
+                <form action="search.html" method="GET" class="search_box">
+                    <div class="select_box">
+                        <select id="category" name="category">
+                            <option value="">All Categories</option>
+                        </select>
+                    </div>
+                    <input type="text" name="q" id="search" placeholder="Search for Products" required>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="header_icons">
+                    <div class="icon">
+                        <a href="wishlist.html">
+                            <i class="fa-regular fa-heart"></i>
+                            <span class="count count_favourite">0</span>
+                        </a>
+                    </div>
+                    <div onclick="open_close_cart()" class="icon">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="count count_item_header">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_header">
+            <div class="container">
+                <nav class="nav">
+                    <span onclick="open_Menu()" class="open_menu"><i class="fa-solid fa-bars"></i></span>
+                    <ul class="nav_links">
+                        <span onclick="open_Menu()" class="close_menu"><i class="fa-regular fa-circle-xmark"></i></span>
+                        <li><a href="index.html">Home</a></li>
+                        <li class="active"><a href="products.html">Shop</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="login_signup btns"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="products-page">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span class="current">Shop</span>
+            </div>
+        </div>
+        <div class="container">
+            <aside class="products-sidebar">
+                <div class="filter-section">
+                    <h4>Categories</h4>
+                    <div id="categoryFilters"></div>
+                </div>
+                <div class="filter-section">
+                    <h4>Price Range</h4>
+                    <div class="form-group">
+                        <input type="number" class="form-input" id="minPrice" placeholder="Min">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-input" id="maxPrice" placeholder="Max">
+                    </div>
+                    <button class="btn" onclick="applyFilters()" style="width:100%;justify-content:center;">Apply</button>
+                </div>
+            </aside>
+            <main class="products-main">
+                <div class="products-header">
+                    <span class="products-count" id="productsCount">Loading...</span>
+                    <div class="products-sort">
+                        <select id="sortBy" onchange="applyFilters()">
+                            <option value="date">Newest</option>
+                            <option value="price_asc">Price: Low to High</option>
+                            <option value="price_desc">Price: High to Low</option>
+                            <option value="name">Name</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="products-grid" id="productsGrid"></div>
+                <div id="pagination"></div>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="big_row">
+                <img class="logo_footer" src="img/electro-logo.png" alt="">
+                <p>Your one-stop shop for quality products at great prices.</p>
+                <div class="icons_footer">
+                    <a href="#"><i class="fa-solid fa-phone"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Quick Links</h4>
+                <div class="links">
+                    <a href="index.html"><i class="fa-solid fa-caret-right"></i> Home</a>
+                    <a href="products.html"><i class="fa-solid fa-caret-right"></i> Shop</a>
+                    <a href="about.html"><i class="fa-solid fa-caret-right"></i> About</a>
+                    <a href="contact.html"><i class="fa-solid fa-caret-right"></i> Contact</a>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Customer Service</h4>
+                <div class="links">
+                    <a href="account.html"><i class="fa-solid fa-caret-right"></i> My Account</a>
+                    <a href="orders.html"><i class="fa-solid fa-caret-right"></i> My Orders</a>
+                    <a href="track-order.html"><i class="fa-solid fa-caret-right"></i> Track Order</a>
+                    <a href="wishlist.html"><i class="fa-solid fa-caret-right"></i> Wishlist</a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="container">
+                <p>&copy; <span>Reda Store.</span> All Rights Reserved.</p>
+                <div class="payment_img"><img src="img/payment_method.png" alt=""></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JS/config.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+    <script src="JS/cart.js"></script>
+    <script src="JS/wishlist.js"></script>
+    <script src="JS/ui.js"></script>
+    <script src="JS/main.js"></script>
+    <script src="JS/products-page.js"></script>
+</body>
+</html>

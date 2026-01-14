@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivre ma commande | Electro Youssef</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/components.css">
+    <link rel="stylesheet" href="CSS/pages.css">
+</head>
+<body>
+    <header>
+        <div class="top_header">
+            <div class="container">
+                <a href="index.html" class="logo"><img src="img/electro-logo.png" alt="Electro Youssef"></a>
+                <form action="search.html" method="GET" class="search_box">
+                    <div class="select_box"><select id="category" name="category"><option value="">Toutes les catégories</option></select></div>
+                    <input type="text" name="q" id="search" placeholder="Rechercher des produits" required>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="header_icons">
+                    <div class="icon"><a href="wishlist.html"><i class="fa-regular fa-heart"></i><span class="count count_favourite">0</span></a></div>
+                    <div class="icon"><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i><span class="count count_item_header">0</span></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_header">
+            <div class="container">
+                <nav class="nav">
+                    <span onclick="open_Menu()" class="open_menu"><i class="fa-solid fa-bars"></i></span>
+                    <ul class="nav_links">
+                        <span onclick="open_Menu()" class="close_menu"><i class="fa-regular fa-circle-xmark"></i></span>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="products.html">Boutique</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="login_signup btns"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="track-order-page">
+        <div class="container">
+            <div class="track-form">
+                <h1>Suivre votre commande</h1>
+                <p>Entrez votre numéro de commande pour voir son statut</p>
+                <form id="trackForm" class="form-group" style="display:flex;gap:10px;">
+                    <input type="text" class="form-input" id="orderId" placeholder="Numéro de commande" required>
+                    <button type="submit" class="btn">Suivre</button>
+                </form>
+            </div>
+            <div id="orderResult"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container"><div class="big_row"><img class="logo_footer" src="img/electro-logo.png" alt=""></div></div>
+        <div class="bottom_footer"><div class="container"><p>&copy; <span>Electro Youssef.</span> Tous droits réservés.</p></div></div>
+    </footer>
+
+    <script src="JS/config.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+    <script src="JS/cart.js"></script>
+    <script src="JS/wishlist.js"></script>
+    <script src="JS/ui.js"></script>
+    <script src="JS/main.js"></script>
+    <script>
+        const statuses = ['Order Placed', 'Processing', 'Shipped', 'Out for Delivery', 'Delivered'];
+        const statusLabels = {
+            'Order Placed': 'Commande passée',
+            'Processing': 'En traitement',
+            'Shipped': 'Expédiée',
+            'Out for Delivery': 'En livraison',
+            'Delivered': 'Livrée'
+        };
+        
+        async function trackOrder(orderId) {
+            const container = document.getElementById('orderResult');
+            container.innerHTML = '<div class="skeleton skeleton-text" style="height:200px;"></div>';
+            
+            const result = await api.trackOrder(orderId);
+            
+            if (result.success && result.order) {
+                const order = result.order;
+                const currentIndex = statuses.indexOf(order.status);
+                
+                container.innerHTML = `
+                    <div class="card" style="max-width:700px;margin:0 auto;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+                            <div>
+                                <h3>Commande #${order._id.slice(-8).toUpperCase()}</h3>
+                                <p style="color:var(--p_color);">Passée le ${UI.formatDate(order.date)}</p>
+                            </div>
+                            <span class="badge badge-${order.status === 'Delivered' ? 'success' : 'info'}">${statusLabels[order.status] || order.status}</span>
+                        </div>
+                        
+                        <div class="order-timeline">
+                            ${statuses.map((status, i) => `
+                                <div class="timeline-step ${i < currentIndex ? 'completed' : ''} ${i === currentIndex ? 'active' : ''}">
+                                    <div class="timeline-icon">
+                                        ${i <= currentIndex ? '<i class="fa-solid fa-check"></i>' : (i + 1)}
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h4>${statusLabels[status]}</h4>
+                                        <p>${i <= currentIndex ? 'Terminé' : 'En attente'}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div style="border-top:1px solid var(--border_color);padding-top:20px;margin-top:20px;">
+                            <h4 style="margin-bottom:15px;">Articles commandés</h4>
+                            ${order.items.map(item => `
+                                <div style="display:flex;gap:15px;align-items:center;margin-bottom:10px;">
+                                    <img src="${item.image?.[0] || item.img || 'img/placeholder.png'}" alt="${item.name}" style="width:60px;height:60px;object-fit:cover;border-radius:8px;">
+                                    <div>
+                                        <p style="font-weight:500;">${item.name}</p>
+                                        <p style="color:var(--p_color);font-size:14px;">Qté: ${item.quantity} × ${UI.formatPrice(item.price)}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                            <div style="text-align:right;margin-top:15px;padding-top:15px;border-top:1px solid var(--border_color);">
+                                <strong>Total: ${UI.formatPrice(order.amount)}</strong>
+                            </div>
+                        </div>
+                        
+                        <div style="border-top:1px solid var(--border_color);padding-top:20px;margin-top:20px;">
+                            <h4 style="margin-bottom:10px;">Adresse de livraison</h4>
+                            <p>${order.address?.firstName} ${order.address?.lastName}</p>
+                            <p style="color:var(--p_color);">${order.address?.street}, ${order.address?.city}</p>
+                            <p style="color:var(--p_color);">${order.address?.state} ${order.address?.zipcode}, ${order.address?.country}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div class="empty-state card" style="max-width:500px;margin:0 auto;">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <h3>Commande introuvable</h3>
+                        <p>Veuillez vérifier votre numéro de commande et réessayer.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        document.getElementById('trackForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const orderId = document.getElementById('orderId').value.trim();
+            if (orderId) trackOrder(orderId);
+        });
+        
+        // Check URL for order ID
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('id');
+        if (orderId) {
+            document.getElementById('orderId').value = orderId;
+            trackOrder(orderId);
+        }
+    </script>
+</body>
+</html>

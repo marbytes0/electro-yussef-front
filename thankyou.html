@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merci pour votre commande | Electro Youssef</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/components.css">
+    <link rel="stylesheet" href="CSS/pages.css">
+    <style>
+        .thankyou-page {
+            padding: 40px 0;
+            min-height: calc(100vh - 300px);
+        }
+        .thankyou-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .thankyou-header {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, var(--main_color_light) 0%, #e8f5e9 100%);
+            border-radius: var(--radius_xl);
+            margin-bottom: 30px;
+        }
+        .thankyou-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--success_color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            animation: scaleIn 0.5s ease;
+        }
+        .thankyou-icon i {
+            font-size: 40px;
+            color: white;
+        }
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .thankyou-header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: var(--heading_color);
+        }
+        .thankyou-header p {
+            color: var(--p_color);
+            font-size: 16px;
+        }
+        .order-number {
+            display: inline-block;
+            background: var(--white_color);
+            padding: 10px 20px;
+            border-radius: var(--radius_md);
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--main_color);
+            border: 1px solid var(--main_color);
+        }
+        .order-details-card {
+            background: var(--white_color);
+            border-radius: var(--radius_lg);
+            border: 1px solid var(--border_color);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .order-details-header {
+            padding: 20px;
+            background: var(--bg_color);
+            border-bottom: 1px solid var(--border_color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .order-details-header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .order-details-body {
+            padding: 20px;
+        }
+        .order-item {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border_color);
+        }
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        .order-item img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: var(--radius_md);
+            border: 1px solid var(--border_color);
+        }
+        .order-item-info {
+            flex: 1;
+        }
+        .order-item-info h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .order-item-info p {
+            color: var(--p_color);
+            font-size: 13px;
+        }
+        .order-item-price {
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .order-summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+        }
+        .order-summary-row.total {
+            font-size: 18px;
+            font-weight: 600;
+            border-top: 2px solid var(--border_color);
+            margin-top: 10px;
+            padding-top: 15px;
+        }
+        .address-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .address-box h4 {
+            font-size: 14px;
+            color: var(--p_color);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .address-box p {
+            line-height: 1.6;
+        }
+        .thankyou-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .thankyou-actions .btn {
+            min-width: 200px;
+            justify-content: center;
+        }
+        .guest-notice {
+            background: #fff8e1;
+            border: 1px solid #ffcc02;
+            border-radius: var(--radius_lg);
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        .guest-notice i {
+            color: #f59e0b;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        .guest-notice-content h4 {
+            margin-bottom: 8px;
+            color: #92400e;
+        }
+        .guest-notice-content p {
+            color: #78350f;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .guest-notice-content .btn {
+            background: #f59e0b;
+            border-color: #f59e0b;
+        }
+        .guest-notice-content .btn:hover {
+            background: #d97706;
+            border-color: #d97706;
+        }
+        .local-orders-section {
+            margin-top: 30px;
+        }
+        .local-orders-section h3 {
+            margin-bottom: 15px;
+        }
+        @media (max-width: 600px) {
+            .thankyou-header {
+                padding: 30px 20px;
+            }
+            .thankyou-header h1 {
+                font-size: 24px;
+            }
+            .address-info {
+                grid-template-columns: 1fr;
+            }
+            .thankyou-actions {
+                flex-direction: column;
+            }
+            .thankyou-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top_header">
+            <div class="container">
+                <a href="index.html" class="logo"><img src="img/electro-logo.png" alt="Electro Youssef"></a>
+                <form action="search.html" method="GET" class="search_box">
+                    <div class="select_box"><select id="category" name="category"><option value="">Toutes les catégories</option></select></div>
+                    <input type="text" name="q" id="search" placeholder="Rechercher des produits" required>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="header_icons">
+                    <div class="icon"><a href="wishlist.html"><i class="fa-regular fa-heart"></i><span class="count count_favourite">0</span></a></div>
+                    <div class="icon"><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i><span class="count count_item_header">0</span></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_header">
+            <div class="container">
+                <nav class="nav">
+                    <span onclick="open_Menu()" class="open_menu"><i class="fa-solid fa-bars"></i></span>
+                    <ul class="nav_links">
+                        <span onclick="open_Menu()" class="close_menu"><i class="fa-regular fa-circle-xmark"></i></span>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="products.html">Boutique</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="login_signup btns"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="thankyou-page">
+        <div class="container">
+            <div class="thankyou-container">
+                <div class="thankyou-header">
+                    <div class="thankyou-icon">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h1>Merci pour votre commande !</h1>
+                    <p>Votre commande a été passée avec succès. Vous recevrez bientôt une confirmation.</p>
+                    <div class="order-number" id="orderNumber">Chargement...</div>
+                </div>
+
+                <div id="guestNotice" class="guest-notice" style="display: none;">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <div class="guest-notice-content">
+                        <h4>Commande en tant qu'invité</h4>
+                        <p>Créez un compte pour suivre facilement vos commandes et accéder à votre historique d'achats. Vos commandes locales seront automatiquement liées à votre compte.</p>
+                        <a href="register.html" class="btn"><i class="fa-solid fa-user-plus"></i> Créer un compte</a>
+                    </div>
+                </div>
+
+                <div class="order-details-card">
+                    <div class="order-details-header">
+                        <h3><i class="fa-solid fa-box"></i> Détails de la commande</h3>
+                        <span class="badge badge-info" id="orderStatus">En traitement</span>
+                    </div>
+                    <div class="order-details-body">
+                        <div id="orderItems"></div>
+                        <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border_color);">
+                            <div class="order-summary-row">
+                                <span>Sous-total</span>
+                                <span id="subtotal">0.00DH</span>
+                            </div>
+                            <div class="order-summary-row">
+                                <span>Livraison</span>
+                                <span id="shipping">10.00DH</span>
+                            </div>
+                            <div class="order-summary-row total">
+                                <span>Total</span>
+                                <span id="total">0.00DH</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-details-card">
+                    <div class="order-details-header">
+                        <h3><i class="fa-solid fa-location-dot"></i> Informations de livraison</h3>
+                    </div>
+                    <div class="order-details-body">
+                        <div class="address-info">
+                            <div class="address-box">
+                                <h4>Contact</h4>
+                                <p id="contactInfo">Chargement...</p>
+                            </div>
+                            <div class="address-box">
+                                <h4>Adresse</h4>
+                                <p id="addressInfo">Chargement...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="thankyou-actions">
+                    <a href="track-order.html" class="btn" id="trackBtn">
+                        <i class="fa-solid fa-truck"></i> Suivre ma commande
+                    </a>
+                    <a href="products.html" class="btn" style="background: transparent; border: 1px solid var(--main_color); color: var(--main_color);">
+                        <i class="fa-solid fa-shopping-bag"></i> Continuer mes achats
+                    </a>
+                </div>
+
+                <div id="localOrdersSection" class="local-orders-section" style="display: none;">
+                    <h3><i class="fa-solid fa-clock-rotate-left"></i> Vos commandes locales</h3>
+                    <p style="color: var(--p_color); margin-bottom: 15px; font-size: 14px;">
+                        Ces commandes sont enregistrées sur cet appareil. Créez un compte pour les synchroniser.
+                    </p>
+                    <div id="localOrdersList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container"><div class="big_row"><img class="logo_footer" src="img/electro-logo.png" alt=""></div></div>
+        <div class="bottom_footer"><div class="container"><p>&copy; <span>Electro Youssef.</span> Tous droits réservés.</p></div></div>
+    </footer>
+
+    <script src="JS/config.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+    <script src="JS/cart.js"></script>
+    <script src="JS/wishlist.js"></script>
+    <script src="JS/ui.js"></script>
+    <script src="JS/main.js"></script>
+    <script src="JS/thankyou.js"></script>
+</body>
+</html>

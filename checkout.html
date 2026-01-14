@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commander | Electro Youssef</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/components.css">
+    <link rel="stylesheet" href="CSS/pages.css">
+</head>
+
+<body>
+    <header>
+        <div class="top_header">
+            <div class="container">
+                <a href="index.html" class="logo"><img src="img/electro-logo.png" alt="Electro Youssef"></a>
+                <form action="search.html" method="GET" class="search_box">
+                    <div class="select_box"><select id="category" name="category">
+                            <option value="">Toutes les catégories</option>
+                        </select></div>
+                    <input type="text" name="q" id="search" placeholder="Rechercher des produits" required>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="header_icons">
+                    <div class="icon"><a href="wishlist.html"><i class="fa-regular fa-heart"></i><span
+                                class="count count_favourite">0</span></a></div>
+                    <div class="icon"><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i><span
+                                class="count count_item_header">0</span></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_header">
+            <div class="container">
+                <nav class="nav">
+                    <span onclick="open_Menu()" class="open_menu"><i class="fa-solid fa-bars"></i></span>
+                    <ul class="nav_links">
+                        <span onclick="open_Menu()" class="close_menu"><i class="fa-regular fa-circle-xmark"></i></span>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="products.html">Boutique</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="login_signup btns"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="checkout-page">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Accueil</a><span>/</span><a href="cart.html">Panier</a><span>/</span><span
+                    class="current">Commander</span>
+            </div>
+        </div>
+        <div class="container">
+            <form class="checkout-form" id="checkoutForm" onsubmit="placeOrder(event)">
+                <div class="checkout-section">
+                    <h3>Informations de contact</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Prénom *</label>
+                            <input type="text" class="form-input" id="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nom *</label>
+                            <input type="text" class="form-input" id="lastName" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Email *</label>
+                            <input type="email" class="form-input" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Téléphone *</label>
+                            <input type="tel" class="form-input" id="phone" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout-section">
+                    <h3>Adresse de livraison</h3>
+                    <div class="form-group">
+                        <label class="form-label">Adresse *</label>
+                        <input type="text" class="form-input" id="street" required
+                            placeholder="Numéro et nom de rue">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Ville *</label>
+                            <input type="text" class="form-input" id="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Région/Province *</label>
+                            <input type="text" class="form-input" id="state" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Code postal *</label>
+                            <input type="text" class="form-input" id="zipcode" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Pays *</label>
+                            <select class="form-input" id="country" required>
+                                <option value="Morocco">Maroc</option>
+                                <option value="France">France</option>
+                                <option value="Belgium">Belgique</option>
+                                <option value="Switzerland">Suisse</option>
+                                <option value="Canada">Canada</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout-section">
+                    <h3>Mode de paiement</h3>
+                    <label class="filter-option"
+                        style="padding:15px;background:var(--bg_color);border-radius:var(--radius_md);">
+                        <input type="radio" name="payment" value="cod" checked>
+                        <div>
+                            <strong>Paiement à la livraison</strong>
+                            <p style="font-size:13px;color:var(--p_color);margin-top:4px;">Payez à la réception de votre commande</p>
+                        </div>
+                    </label>
+                </div>
+            </form>
+
+            <div class="checkout-summary">
+                <div class="cart-summary-box">
+                    <h3>Récapitulatif</h3>
+                    <div id="orderItems"></div>
+                    <div style="margin-top:20px;padding-top:15px;border-top:1px solid var(--border_color);">
+                        <div class="summary-row"><span>Sous-total</span><span id="subtotal">0.00DH</span></div>
+                        <div class="summary-row"><span>Livraison</span><span id="shipping">10.00DH</span></div>
+                        <div class="summary-row total"><span>Total</span><span id="total">10.00DH</span></div>
+                    </div>
+                    <button type="submit" form="checkoutForm" class="btn" id="placeOrderBtn"
+                        style="width:100%;justify-content:center;margin-top:20px;">
+                        Confirmer la commande <i class="fa-solid fa-check"></i>
+                    </button>
+                    <p style="text-align:center;font-size:13px;color:var(--p_color);margin-top:15px;">
+                        <i class="fa-solid fa-lock"></i> Paiement sécurisé
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="big_row"><img class="logo_footer" src="img/electro-logo.png" alt=""></div>
+        </div>
+        <div class="bottom_footer">
+            <div class="container">
+                <p>&copy; <span>Electro Youssef.</span> Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JS/config.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+    <script src="JS/cart.js"></script>
+    <script src="JS/wishlist.js"></script>
+    <script src="JS/ui.js"></script>
+    <script src="JS/main.js"></script>
+    <script src="JS/checkout.js"></script>
+</body>
+
+</html>

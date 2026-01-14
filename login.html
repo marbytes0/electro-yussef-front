@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion | Electro Youssef</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/components.css">
+    <link rel="stylesheet" href="CSS/pages.css">
+</head>
+<body>
+    <header>
+        <div class="top_header">
+            <div class="container">
+                <a href="index.html" class="logo"><img src="img/electro-logo.png" alt="Electro Youssef"></a>
+                <div class="header_icons">
+                    <div class="icon">
+                        <a href="wishlist.html">
+                            <i class="fa-regular fa-heart"></i>
+                            <span class="count count_favourite">0</span>
+                        </a>
+                    </div>
+                    <div onclick="open_close_cart()" class="icon">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="count count_item_header">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="auth-page">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>Bon retour</h1>
+                <p>Connectez-vous à votre compte</p>
+            </div>
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Adresse email</label>
+                    <input type="email" class="form-input" id="email" required placeholder="Entrez votre email">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mot de passe</label>
+                    <input type="password" class="form-input" id="password" required placeholder="Entrez votre mot de passe">
+                </div>
+                <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="remember"> Se souvenir de moi
+                    </label>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; justify-content: center;">
+                    Se connecter <i class="fa-solid fa-right-to-bracket"></i>
+                </button>
+            </form>
+            <div class="auth-footer">
+                <p>Pas encore de compte ? <a href="register.html">Inscrivez-vous ici</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/config.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+    <script src="JS/cart.js"></script>
+    <script src="JS/wishlist.js"></script>
+    <script src="JS/ui.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const btn = e.target.querySelector('button[type="submit"]');
+            
+            UI.showLoading(btn);
+            const result = await auth.login(email, password);
+            UI.hideLoading(btn);
+            
+            if (result.success) {
+                UI.showToast('Connexion réussie !', 'success');
+                setTimeout(() => window.location.href = 'index.html', 1000);
+            } else {
+                UI.showToast(result.message || 'Échec de la connexion', 'error');
+            }
+        });
+    </script>
+</body>
+</html>

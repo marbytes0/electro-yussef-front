@@ -240,18 +240,36 @@ function renderTabs(product) {
         </div>
     `;
 
-    // Specifications tab
-    const specs = product.specifications || generateDefaultSpecs(product);
-    document.getElementById('specificationsContent').innerHTML = `
-        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0;">
-            ${specs.map((spec, i) => `
-                <div style="display:flex;padding:14px 16px;border-bottom:1px solid #e2e8f0;background:${i % 2 === 0 ? '#f8fafc' : 'white'};">
-                    <span style="width:150px;font-weight:600;color:#64748b;font-size:13px;">${spec.label}</span>
-                    <span style="flex:1;color:#1e293b;font-size:13px;">${spec.value}</span>
-                </div>
-            `).join('')}
-        </div>
-    `;
+    // Specifications tab - ONLY from database
+    const dbSpecs = product.specifications || [];
+    console.log('Product specifications from DB:', dbSpecs); // Debug log
+    
+    // Convert database specs format {name, value} to display format {label, value}
+    // Filter out empty specifications
+    const specs = dbSpecs
+        .filter(spec => spec.name && spec.value)
+        .map(spec => ({ label: spec.name, value: spec.value }));
+    
+    // Only show specifications section if there are specs from database
+    if (specs.length > 0) {
+        document.getElementById('specificationsContent').innerHTML = `
+            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0;">
+                ${specs.map((spec, i) => `
+                    <div style="display:flex;padding:14px 16px;border-bottom:1px solid #e2e8f0;background:${i % 2 === 0 ? '#f8fafc' : 'white'};">
+                        <span style="width:150px;font-weight:600;color:#64748b;font-size:13px;">${spec.label}</span>
+                        <span style="flex:1;color:#1e293b;font-size:13px;">${spec.value}</span>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    } else {
+        document.getElementById('specificationsContent').innerHTML = `
+            <div style="width:100%;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;color:#64748b;">
+                <i class="fa-solid fa-list-check" style="font-size:36px;color:#e2e8f0 !important;margin-bottom:12px;"></i>
+                <p style="font-size:14px;margin:0;">Aucune caractéristique disponible pour ce produit.</p>
+            </div>
+        `;
+    }
 
     // Reviews tab - from database
     renderReviewsTab(rating, reviewCount);

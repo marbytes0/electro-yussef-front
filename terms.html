@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditions Générales | Electro Youssef</title>
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/components.css">
+    <link rel="stylesheet" href="CSS/pages.css">
+</head>
+<body>
+    <header>
+        <div class="top_header">
+            <div class="container">
+                <a href="index.html" class="logo"><img src="img/electro-logo.png" alt="Electro Youssef"></a>
+                <form action="search.html" method="GET" class="search_box">
+                    <div class="select_box">
+                        <select id="searchCategory" name="category">
+                            <option value="">Toutes les catégories</option>
+                        </select>
+                    </div>
+                    <input type="text" name="q" id="search" placeholder="Rechercher des produits" required>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="header_icons">
+                    <div class="icon">
+                        <a href="wishlist.html">
+                            <i class="fa-regular fa-heart"></i>
+                            <span class="count count_favourite">0</span>
+                        </a>
+                    </div>
+                    <div onclick="open_close_cart()" class="icon">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="count count_item_header">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_header">
+            <div class="container">
+                <nav class="nav">
+                    <span onclick="open_Menu()" class="open_menu"><i class="fa-solid fa-bars"></i></span>
+                    <div class="menu-overlay" onclick="open_Menu()"></div>
+                    <ul class="nav_links">
+                        <span onclick="open_Menu()" class="close_menu"><i class="fa-regular fa-circle-xmark"></i></span>
+                        <li><a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a></li>
+                        <li><a href="products.html"><i class="fa-solid fa-shop"></i> Boutique</a></li>
+                        <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> À propos</a></li>
+                        <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="login_signup btns"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="cart-overlay" onclick="open_close_cart()"></div>
+    <div class="cart">
+        <div class="top_cart">
+            <h3>Panier : <span class="Count_item_cart">0</span></h3>
+            <span onclick="open_close_cart()" class="close_cart"><i class="fa-regular fa-circle-xmark"></i></span>
+        </div>
+        <div class="items_in_cart" id="cart_items"></div>
+        <div class="bottom_cart">
+            <div class="total">
+                <p>Sous-total</p>
+                <p class="price_cart_toral">0DH</p>
+            </div>
+            <div class="button_cart">
+                <a href="checkout.html" class="btn_cart btn">Commander</a>
+                <span onclick="open_close_cart()" class="btn_cart trans_bg btn">Continuer mes achats</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="padding:40px 20px;max-width:900px;margin:0 auto;">
+        <div class="breadcrumb" style="margin-bottom:30px;">
+            <a href="index.html">Accueil</a><span>/</span><span class="current">Conditions Générales</span>
+        </div>
+
+        <div style="background:#fff;border-radius:16px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+            <h1 style="font-size:28px;color:#1f2937;margin:0 0 10px 0;">Conditions Générales de Vente</h1>
+            <p style="color:#6b7280;margin-bottom:30px;">Dernière mise à jour : Janvier 2026</p>
+
+            <section style="margin-bottom:30px;">
+                <h2 style="font-size:18px;color:#1e40af;margin:0 0 12px 0;display:flex;align-items:center;gap:10px;">
+                    <i class="fa-solid fa-store" style="font-size:16px;"></i> 1. Présentation
+                </h2>
+                <p style="color:#4b5563;line-height:1.7;margin:0;">
+                    Electro Youssef est une boutique en ligne spécialisée dans la vente de produits électroniques et accessoires au Maroc. 
+                    En passant commande sur notre site, vous acceptez les présentes conditions générales de vente.
+                </p>
+            </section>
+
+            <section style="margin-bottom:30px;">
+                <h2 style="font-size:18px;color:#1e40af;margin:0 0 12px 0;display:flex;align-items:center;gap:10px;">
+                    <i class="fa-solid fa-box" style="font-size:16px;"></i> 2. Produits
+                </h2>
+                <p style="color:#4b5563;line-height:1.7;margin:0;">
+                    Les produits proposés sont décrits avec la plus grande exactitude possible. Les photos sont non contractuelles. 
+                    En cas d'erreur manifeste entre les caractéristiques du produit et sa représentation, Electro Youssef ne saurait être tenu responsable.
+                </p>
+            </section>
+
+            <section style="margin-bottom:30px;">
+                <h2 style="font-size:18px;color:#1e40af;margin:0 0 12px 0;display:flex;align-items:center;gap:10px;">
+                    <i class="fa-solid fa-credit-card" style="font-size:16px;"></i> 3. Prix et Paiement
+                </h2>
+                <p style="color:#4b5563;line-height:1.7;margin:0 0 10px 0;">
+                    Les prix sont indiqués en Dirhams marocains (DH) toutes taxes comprises. Le paiement s'effectue à la livraison (Cash on Delivery).
+                </p>
+                <ul style="color:#4b5563;line-height:1.8;margin:0;padding-left:20px;">
+                    <li>Les prix peuvent être modifiés à tout moment</li>
+                    <li>Le prix applicable est celui affiché au moment de la commande</li>
+                    <li>Paiement en espèces à la réception de votre colis</li>
+                </ul>
+            </section>
+
+            <section style="margin-bottom:30px;">
+                <h2 style="font-size:18px;color:#1e40af;margin:0 0 12px 0;display:flex;align-items:center;gap:10px;">
+                    <i class="fa-solid fa-truck" style="font-size:16px;"></i> 4. Livraison
+                </h2>
+                <p style="color:#4b5563;line-height:1.7;margin:0 0 10px 0;">
+                    Nous livrons partout au Maroc. Les délais de livraison sont donnés à titre indicatif.
+                </p>
+                <ul style="color:#4b5563;line-height:1.8;margin:0;padding-left:20px;">
+                    <li>Délai moyen : 2 à 5 jours ouvrables</li>
+                    <li>Frais de livraison calculés selon la destination</li>
+                    <li>Suivi de commande disponible dans votre espace client</li>
+                </ul>
+            </section>
+
+            <section style="margin-bottom:30px;">
+                <h2 style="font-size:18px;color:#1e40af;margin:0 0 12px 0;display:flex;align-items:center;gap:10px;">
+                    <i class="fa-solid fa-rotate-left" style="font-size:16px;"></i> 5. Retours et Remboursements
+                </h2>
+                <p style="color:#4b5563;line-height:1.7;margin:0 0 10px 0;">
+                    Vous disposez d'un délai de 7 jours après réception pour retourner un produit non conforme ou défectueux.
+                </p>
+                <ul style="color:#4b5563;line-height:1.8;margin:0;padding-left:20px;">
+                    <li>Le produit doit être retourné dans son emballage d'origine</li>
+                    <li>Le produit ne doit pas avoir été utilisé</li>
+                    <li>Contactez-nous avant tout retour</li>
+                </ul>
+            </section>
+
+            <section style="margin-bottom:30px;">
+                <h2 style="font-size:18px;color:#1e40af;margin:0 0 12px 0;display:flex;align-items:center;gap:10px;">
+                    <i class="fa-solid fa-shield-halved" style="font-size:16px;"></i> 6. Garantie
+                </h2>
+                <p style="color:#4b5563;line-height:1.7;margin:0;">
+                    Tous nos produits bénéficient de la garantie légale de conformité. La durée de garantie est indiquée sur chaque fiche produit. 
+                    La garantie ne couvre pas les dommages résultant d'une mauvaise utilisation.
+                </p>
+            </section>
+
+            <section style="margin-bottom:30px;">
+                <h2 style="font-size:18px;color:#1e40af;margin:0 0 12px 0;display:flex;align-items:center;gap:10px;">
+                    <i class="fa-solid fa-user-shield" style="font-size:16px;"></i> 7. Protection des Données
+                </h2>
+                <p style="color:#4b5563;line-height:1.7;margin:0;">
+                    Vos données personnelles sont collectées uniquement pour le traitement de vos commandes. 
+                    Elles ne sont jamais partagées avec des tiers à des fins commerciales. 
+                    Vous pouvez demander la suppression de vos données à tout moment.
+                </p>
+            </section>
+
+            <section>
+                <h2 style="font-size:18px;color:#1e40af;margin:0 0 12px 0;display:flex;align-items:center;gap:10px;">
+                    <i class="fa-solid fa-headset" style="font-size:16px;"></i> 8. Contact
+                </h2>
+                <p style="color:#4b5563;line-height:1.7;margin:0;">
+                    Pour toute question concernant ces conditions générales, contactez-nous via notre 
+                    <a href="contact.html" style="color:#3b82f6;text-decoration:none;font-weight:500;">page de contact</a>.
+                </p>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="big_row">
+                <h2 class="footer-brand">Electro <span>Youssef</span></h2>
+                <p>Votre boutique unique pour des produits de qualité à bon prix.</p>
+            </div>
+            <div class="row">
+                <h4>Liens Rapides</h4>
+                <div class="links">
+                    <a href="products.html"><i class="fa-solid fa-caret-right"></i> Boutique</a>
+                    <a href="about.html"><i class="fa-solid fa-caret-right"></i> À propos</a>
+                    <a href="contact.html"><i class="fa-solid fa-caret-right"></i> Contact</a>
+                    <a href="terms.html"><i class="fa-solid fa-caret-right"></i> Conditions générales</a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="container">
+                <p>&copy; <span>Electro Youssef.</span> Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JS/config.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+    <script src="JS/cart.js"></script>
+    <script src="JS/wishlist.js"></script>
+    <script src="JS/ui.js"></script>
+    <script src="JS/main.js"></script>
+</body>
+</html>

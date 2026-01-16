@@ -53,7 +53,22 @@ function clearProductSearch() {
 
 async function initProductsPage() {
     await loadCategories();
+    applyUrlFilters();
     await loadProducts();
+}
+
+// Apply filters from URL parameters
+function applyUrlFilters() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryParam = urlParams.get('category');
+    
+    // Pre-check category checkbox if category is in URL
+    if (categoryParam) {
+        const checkbox = document.querySelector(`input[name="category"][value="${categoryParam}"]`);
+        if (checkbox) {
+            checkbox.checked = true;
+        }
+    }
 }
 
 async function loadCategories() {
@@ -106,10 +121,17 @@ async function loadProducts(page = 1) {
         allProducts = result.products;
         renderProducts(result.products);
         
-        // Update count with search info
+        // Update count with search/category info
         const totalCount = result.pagination?.total || result.products.length;
         if (searchQuery) {
-            countEl.innerHTML = `<i class="fa-solid fa-search" style="margin-right:6px;color:var(--main_color);"></i> ${result.products.length} résultat(s) pour "<strong>${searchQuery}</strong>"`;
+            countEl.innerHTML = `<i class="fa-solid fa-search" style="margin-right:6px;color:var(--main_color);"></i> ${totalCount} résultat(s) pour "<strong>${searchQuery}</strong>"`;
+        } else if (filters.category) {
+            // Handle multiple categories display
+            const categoryNames = filters.category.split(',').map(c => c.trim());
+            const categoryDisplay = categoryNames.length > 1 
+                ? categoryNames.join(', ') 
+                : categoryNames[0];
+            countEl.innerHTML = `<i class="fa-solid fa-tag" style="margin-right:6px;color:var(--main_color);"></i> ${totalCount} produit(s) dans "<strong>${categoryDisplay}</strong>"`;
         } else {
             countEl.textContent = `Affichage de ${result.products.length} sur ${totalCount} produits`;
         }
@@ -129,10 +151,19 @@ function getFilters() {
     const maxPrice = document.getElementById('maxPrice')?.value;
     const sortBy = document.getElementById('sortBy')?.value;
     const urlParams = new URLSearchParams(window.location.search);
+    const urlCategory = urlParams.get('category');
+
+    // Use checked categories first, then fall back to URL category
+    let category = '';
+    if (checkedCategories.length > 0) {
+        category = checkedCategories.length === 1 ? checkedCategories[0] : checkedCategories.join(',');
+    } else if (urlCategory) {
+        category = urlCategory;
+    }
 
     return {
         query: searchQuery || urlParams.get('q') || '',
-        category: checkedCategories.length === 1 ? checkedCategories[0] : '',
+        category: category,
         minPrice: minPrice || null,
         maxPrice: maxPrice || null,
         sortBy: sortBy || 'date'

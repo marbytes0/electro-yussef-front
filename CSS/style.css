@@ -1097,9 +1097,19 @@ footer .container .big_row {
 }
 
 footer .container .big_row .logo_footer {
-    width: 140px;
+    display: none;
+}
+
+footer .container .big_row .footer-brand {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
     margin-bottom: 15px;
-    filter: brightness(0) invert(1);
+    font-family: "DM Sans", sans-serif;
+}
+
+footer .container .big_row .footer-brand span {
+    color: var(--main_color);
 }
 
 footer .container .big_row p {

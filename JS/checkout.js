@@ -65,8 +65,6 @@ async function placeOrder(e) {
             street: document.getElementById('street').value,
             city: document.getElementById('city').value,
             state: document.getElementById('state').value,
-            zipcode: document.getElementById('zipcode').value,
-            country: document.getElementById('country').value,
         }
     };
     
